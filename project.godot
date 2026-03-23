@@ -8,11 +8,15 @@
 
 config_version=5
 
+[animation]
+
+compatibility/default_parent_skeleton_in_mesh_instance_3d=true
+
 [application]
 
 config/name="Mini Music Player"
 run/main_scene="uid://bbp3ql0w1h2xw"
-config/features=PackedStringArray("4.4", "C#", "GL Compatibility")
+config/features=PackedStringArray("4.6", "C#", "GL Compatibility")
 boot_splash/bg_color=Color(0.160784, 0.176471, 0.254902, 0)
 boot_splash/show_image=false
 boot_splash/use_filter=false
@@ -42,9 +46,9 @@ project/assembly_name="Mini Music Player"
 [gui]
 
 timers/tooltip_delay_sec=0.7
+theme/default_font_multichannel_signed_distance_field=true
 theme/custom="uid://35346j02g11j"
 theme/custom_font="uid://cy1iisvlx5ejj"
-theme/default_font_multichannel_signed_distance_field=true
 
 [input]
 
