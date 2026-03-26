@@ -1,6 +1,6 @@
 using Godot;
 using System;
-using System.IO;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using static Global;
 using static SignalBus;
@@ -76,7 +76,7 @@ public partial class FileManager : Node
                     }
                     var music = new MusicResource();
                     music.Path = directory + "/" + filename;
-                    music.Name =  tagFile.Tag.Title ?? Path.GetFileNameWithoutExtension(filename);
+                    music.Name =  tagFile.Tag.Title ?? System.IO.Path.GetFileNameWithoutExtension(filename);
                     music.Artist = tagFile.Tag.FirstPerformer ?? "unknown";
                     music.Album = tagFile.Tag.Album ?? "unknown";
                     music.AlbumArt = albumArt;
@@ -108,6 +108,34 @@ public partial class FileManager : Node
         else
             Instance.MusicResources.Sort((resource, musicResource) => resource.Name.CompareTo(musicResource.Name));
         return 0;
+    }
+    /// <summary>
+    /// Called from AudioManager to load the next music resource to be played.
+    /// </summary>
+    /// <param name="filepath"></param>
+    public AudioStream LoadMusicResource(string path)
+    {
+        using var file = FileAccess.Open(path, FileAccess.ModeFlags.Read);
+        if (file == null)
+        {
+            GD.PushError($"Could not open file {path}");
+            return null;
+        }
+        switch (path.GetExtension())
+        {
+            case "mp3":
+                var sound = new AudioStreamMP3();
+                sound.Data = file.GetBuffer((long)file.GetLength());
+                return sound;
+            case "wav":
+                var wavSound = new AudioStreamWav();
+                wavSound.Data = file.GetBuffer((long)file.GetLength());
+                return wavSound;
+            case "ogg":
+                var oggSound = AudioStreamOggVorbis.LoadFromFile(path);
+                return oggSound;
+        }
+        return null;
     }
     
     

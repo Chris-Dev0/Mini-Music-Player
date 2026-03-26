@@ -40,6 +40,7 @@ public partial class AudioManager : Node
     private MusicResource _currentSong;
     private int _queueIndex;
     private readonly Random _random = new();
+    private FileManager _fileManager;
     private enum TrackRepeat
     {
         NoRepeat,
@@ -51,10 +52,12 @@ public partial class AudioManager : Node
 
     public override void _Ready()
     {
+        // Instance.GetFileManger();
         _player = GetNode<AudioStreamPlayer>("AudioStreamPlayer");
         SigBus.MusicEntrySelected += MusicEntrySelected;
         _currentTrackRepeat = TrackRepeat.NoRepeat;
         _shuffleToggle = false;
+        _fileManager = Global.FileManagerInstance;
     }
 
     private void NewDirectorySelected()
@@ -128,18 +131,19 @@ public partial class AudioManager : Node
     //load song, tell UI to display the song info via signal, set next song
     private void SongChanged(MusicResource resource)
     {
-        switch (resource.Extension)
-        {
-            case "mp3":
-                _player.Stream = LoadMp3(resource.Path);
-                break;
-            case "wav":
-                _player.Stream = LoadWav(resource.Path);
-                break;
-            case "ogg":
-                _player.Stream = LoadOggVorbis(resource.Path);
-                break;
-        }
+        // switch (resource.Extension)
+        // {
+        //     case "mp3":
+        //         _player.Stream = LoadMp3(resource.Path);
+        //         break;
+        //     case "wav":
+        //         _player.Stream = LoadWav(resource.Path);
+        //         break;
+        //     case "ogg":
+        //         _player.Stream = LoadOggVorbis(resource.Path);
+        //         break;
+        // }
+        _player.Stream=_fileManager.LoadMusicResource(resource.Path);
         _player.Seek(0.0f);
         _player.Play();
         _player.Seek(0.0f);
