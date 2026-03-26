@@ -6,19 +6,21 @@ using static Global;
 using static SignalBus;
 public partial class FileManager : Node
 {
-    [Export]
-    public Node UiManager;
+    
+    
     [Export]
     private Texture _defaultAlbumArtTexture;
     private FileDialog _fileDialog;
     private string _lastDirectoryPath;
     private bool _firstDirectory = true;
+    private UiManager _uiManagerInstance;
     public override void _Ready()
     {
         SigBus.NewDirectorySelected += NewDirectorySelected;
         _fileDialog = GetNode<FileDialog>("FileDialog");
         _fileDialog.DirSelected += NewDirectorySelected;
         _lastDirectoryPath = "";
+        _uiManagerInstance = Global.UiManagerInstance;
     }
 
     private async void NewDirectorySelected(string directory)
@@ -27,7 +29,7 @@ public partial class FileManager : Node
         _lastDirectoryPath = directory;
         SigBus.EmitSignal(nameof(SignalBus.SendNotification), 0, "Fetching music files...", 1.5);
         var result = await Task.Run(() => GetMusicFiles(directory));
-        UiManager.Call("PopulateMusicList");
+        _uiManagerInstance.Call("PopulateMusicList");
     }
 
     private async Task<int> GetMusicFiles(string directory)
@@ -147,7 +149,7 @@ public partial class FileManager : Node
         }
         else if(!DirAccess.DirExistsAbsolute(_lastDirectoryPath))
         {
-            _fileDialog.SetCurrentPath("C:/");
+            _fileDialog.SetCurrentPath("C:/"); //add linux fallback path
         }
         else
         {

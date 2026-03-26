@@ -62,9 +62,8 @@ _noShuffleButtonTexture = ExtResource("20_og1vs")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="AudioManager" unique_id=88916045]
 
-[node name="FileManager" type="Node" parent="." unique_id=1424830248 node_paths=PackedStringArray("UiManager")]
+[node name="FileManager" type="Node" parent="." unique_id=1424830248]
 script = ExtResource("3_jyhfs")
-UiManager = NodePath("../UIManager")
 _defaultAlbumArtTexture = ExtResource("20_pm3ni")
 
 [node name="FileDialog" type="FileDialog" parent="FileManager" unique_id=2059883840]
@@ -75,7 +74,7 @@ file_mode = 2
 access = 2
 use_native_dialog = true
 
-[node name="UIManager" type="Node" parent="." unique_id=525166295 node_paths=PackedStringArray("Player", "_notificationContainer", "_musicListContainer", "_musicListScrollContainer", "_preferencesButton", "_preferencesWindow", "_volumeSlider", "_volumeButton", "_durationSlider", "_currentSongTimeLabel", "_songTimeLabel", "_songNameLabel", "_artistLabel", "_albumLabel", "_albumArtRect", "_playPauseButton")]
+[node name="UiManager" type="Node" parent="." unique_id=525166295 node_paths=PackedStringArray("Player", "_notificationContainer", "_musicListContainer", "_musicListScrollContainer", "_preferencesButton", "_preferencesWindow", "_volumeSlider", "_volumeButton", "_durationSlider", "_currentSongTimeLabel", "_songTimeLabel", "_songNameLabel", "_artistLabel", "_albumLabel", "_albumArtRect", "_playPauseButton")]
 script = ExtResource("2_0wfyh")
 Player = NodePath("../AudioManager/AudioStreamPlayer")
 _musicEntryScene = ExtResource("6_trceg")
@@ -686,14 +685,14 @@ popup_window = false
 
 [connection signal="finished" from="AudioManager/AudioStreamPlayer" to="AudioManager" method="PlayNextSong"]
 [connection signal="dir_selected" from="FileManager/FileDialog" to="AudioManager" method="NewDirectorySelected" unbinds=1]
-[connection signal="dir_selected" from="FileManager/FileDialog" to="UIManager" method="NewDirectorySelected" unbinds=1]
+[connection signal="dir_selected" from="FileManager/FileDialog" to="UiManager" method="NewDirectorySelected" unbinds=1]
 [connection signal="pressed" from="PanelContainer/VBoxContainer/HeaderPanelContainer/MarginContainer/HBoxContainer/HBoxContainer/DirectoryButton" to="FileManager" method="ShowFileDialog"]
-[connection signal="pressed" from="PanelContainer/VBoxContainer/HeaderPanelContainer/MarginContainer/HBoxContainer/HBoxContainer/PreferencesButton" to="UIManager" method="PreferencesButtonPressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/HeaderPanelContainer/MarginContainer/HBoxContainer/HBoxContainer/PreferencesButton" to="UiManager" method="PreferencesButtonPressed"]
 [connection signal="pressed" from="PanelContainer/VBoxContainer/HeaderPanelContainer/MarginContainer/HBoxContainer/HBoxContainer/ShuffleButton" to="AudioManager" method="_shuffleButtonPressed"]
 [connection signal="pressed" from="PanelContainer/VBoxContainer/HeaderPanelContainer/MarginContainer/HBoxContainer/HBoxContainer/TrackRepeatButton" to="AudioManager" method="_trackRepeatButtonPressed"]
-[connection signal="pressed" from="PanelContainer/VBoxContainer/HeaderPanelContainer/MarginContainer/HBoxContainer/HBoxContainer2/MinimizeButton" to="UIManager" method="MinimizeButtonPressed"]
-[connection signal="pressed" from="PanelContainer/VBoxContainer/HeaderPanelContainer/MarginContainer/HBoxContainer/HBoxContainer2/CloseButton" to="UIManager" method="ExitButtonPressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/HeaderPanelContainer/MarginContainer/HBoxContainer/HBoxContainer2/MinimizeButton" to="UiManager" method="MinimizeButtonPressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/HeaderPanelContainer/MarginContainer/HBoxContainer/HBoxContainer2/CloseButton" to="UiManager" method="ExitButtonPressed"]
 [connection signal="pressed" from="PanelContainer/VBoxContainer/MarginContainer/PanelContainer/MainMarginContainer/VBoxContainer/VBoxContainer/VBoxContainer/HBoxContainer/CenterContainer/HBoxContainer3/SkipBckButton" to="AudioManager" method="_skipBackButtonPressed"]
 [connection signal="pressed" from="PanelContainer/VBoxContainer/MarginContainer/PanelContainer/MainMarginContainer/VBoxContainer/VBoxContainer/VBoxContainer/HBoxContainer/CenterContainer/HBoxContainer3/PlayPauseButton" to="AudioManager" method="_playPauseButtonPressed"]
 [connection signal="pressed" from="PanelContainer/VBoxContainer/MarginContainer/PanelContainer/MainMarginContainer/VBoxContainer/VBoxContainer/VBoxContainer/HBoxContainer/CenterContainer/HBoxContainer3/SkipFrwdButton" to="AudioManager" method="_skipForwardButtonPressed"]
-[connection signal="pressed" from="PanelContainer/VBoxContainer/MarginContainer/PanelContainer/MainMarginContainer/VBoxContainer/VBoxContainer/VBoxContainer/HBoxContainer/HBoxContainer3/HBoxContainer4/VolumeButton" to="UIManager" method="VolumeButtonPressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/MarginContainer/PanelContainer/MainMarginContainer/VBoxContainer/VBoxContainer/VBoxContainer/HBoxContainer/HBoxContainer3/HBoxContainer4/VolumeButton" to="UiManager" method="VolumeButtonPressed"]

@@ -8,6 +8,7 @@ public partial class Global : Node
     public readonly List<MusicResource> MusicResources = new();
     public bool MusicListAlphabeticalSort = false;
     public static FileManager FileManagerInstance => Instance.GetNode<FileManager>("/root/Main/FileManager");
+    public static UiManager UiManagerInstance => Instance.GetNode<UiManager>("/root/Main/UiManager");
     public string FirstDirectoryPath;
     public override void _Ready()
     {

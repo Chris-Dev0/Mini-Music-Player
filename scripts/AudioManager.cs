@@ -52,7 +52,6 @@ public partial class AudioManager : Node
 
     public override void _Ready()
     {
-        // Instance.GetFileManger();
         _player = GetNode<AudioStreamPlayer>("AudioStreamPlayer");
         SigBus.MusicEntrySelected += MusicEntrySelected;
         _currentTrackRepeat = TrackRepeat.NoRepeat;
