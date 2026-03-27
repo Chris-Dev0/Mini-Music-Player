@@ -4,6 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using static SignalBus;
 using static Global;
+/// <summary>
+/// Handles audio playback and manages the song queue.
+/// </summary>
 public partial class AudioManager : Node
 {
     [Export]
@@ -58,7 +61,9 @@ public partial class AudioManager : Node
         _shuffleToggle = false;
         _fileManager = Global.FileManagerInstance;
     }
-
+    /// <summary>
+    /// Clear the queue and stop the music when a new directory is selected.
+    /// </summary>
     private void NewDirectorySelected()
     {
         _player.Stream = null;
@@ -67,13 +72,20 @@ public partial class AudioManager : Node
         _queue.Clear();
     }
     
-    //user clicks music entry, starts new queue
+    /// <summary>
+    /// When a music entry is selected from the song list, create a new queue with <see cref="SetupQueue"/> and start playing the new song
+    /// </summary>
+    /// <param name="resource"></param>
     private void MusicEntrySelected(MusicResource resource)
     {
         SetupQueue(resource);
         SongChanged(resource);
         _playPauseButton.Icon = _pauseButtonTexture;
     }
+    /// <summary>
+    /// Sets up the song queue based on the selected song, current shuffle and repeat settings, and the global music resource list. Called when a new song is selected from the song list or when skip forward/backward is pressed.
+    /// </summary>
+    /// <param name="resource">The first/current song in the queue</param>
 
     private void SetupQueue(MusicResource resource)
     {
@@ -96,6 +108,9 @@ public partial class AudioManager : Node
             _queueIndex = _queue.IndexOf(resource);
             SetNextSong();
     }
+    /// <summary>
+    /// Determines the next song to play based on the current song, shuffle and repeat settings, and the song queue. Called from <c>SetupQueue</c> and when a song finishes playing.
+    /// </summary>
     private void SetNextSong()
     {
         if (_currentTrackRepeat == TrackRepeat.SingleTrackRepeat)
@@ -118,7 +133,9 @@ public partial class AudioManager : Node
             }
         }
     }
-    // connected to Player.Finished(), can also be triggered by the skip ahead button
+    /// <summary>
+    /// Plays the next song in the queue when the current song finishes, or when skip forward is pressed.
+    /// </summary>
     private void PlayNextSong()
     {
         if (_nextSong == null) return;
@@ -127,21 +144,12 @@ public partial class AudioManager : Node
         SetNextSong();
     }
     
-    //load song, tell UI to display the song info via signal, set next song
+    /// <summary>
+    /// Handles changing the current song, including loading the new song into the AudioStreamPlayer, starting playback, and emitting the SongChanged signal.
+    /// </summary>
+    /// <param name="resource"></param>
     private void SongChanged(MusicResource resource)
     {
-        // switch (resource.Extension)
-        // {
-        //     case "mp3":
-        //         _player.Stream = LoadMp3(resource.Path);
-        //         break;
-        //     case "wav":
-        //         _player.Stream = LoadWav(resource.Path);
-        //         break;
-        //     case "ogg":
-        //         _player.Stream = LoadOggVorbis(resource.Path);
-        //         break;
-        // }
         _player.Stream=_fileManager.LoadMusicResource(resource.Path);
         _player.Seek(0.0f);
         _player.Play();
@@ -151,43 +159,9 @@ public partial class AudioManager : Node
         SigBus.EmitSignal(nameof(SigBus.SongChanged),resource);
         
     }
-    private static AudioStreamMP3 LoadMp3(string path)
-    {
-        using var file = FileAccess.Open(path, FileAccess.ModeFlags.Read);
-        if (file == null)
-        {
-            GD.PushError($"Could not open file {path}");
-            return null;
-        }
-        var sound = new AudioStreamMP3();
-        sound.Data = file.GetBuffer((long)file.GetLength());
-        return sound;
-    }
-
-    private static AudioStreamWav LoadWav(string path)
-    {
-        using var file = FileAccess.Open(path, FileAccess.ModeFlags.Read);
-        if (file == null)
-        {
-            GD.PushError($"Could not open file {path}");
-            return null;
-        }
-        var sound = new AudioStreamWav();
-        sound.Data = file.GetBuffer((long)file.GetLength());
-        return sound;
-    }
-
-    private static AudioStreamOggVorbis LoadOggVorbis(string path)
-    {
-        using var file = FileAccess.Open(path, FileAccess.ModeFlags.Read);
-        if (file == null)
-        {
-            GD.PushError($"Could not open file {path}");
-            return null;
-        }
-        var sound = AudioStreamOggVorbis.LoadFromFile(path);
-        return sound;
-    }
+    /// <summary>
+    /// Handles play/pause button presses, toggling playback of the current song and updating the button icon and tooltip.
+    /// </summary>
     private void _playPauseButtonPressed()
     {
         if (_player.Stream == null) return;

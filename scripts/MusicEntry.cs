@@ -1,11 +1,26 @@
 using Godot;
 using System;
 using static SignalBus;
+/// <summary>
+/// The UI element for displaying a music entry in the playlist. Contains the information of its corresponding <c>MusicResource</c> and emits a signal with the resource when double-clicked, which is used by <c>AudioManager</c> to play the selected track.
+/// </summary>
 public partial class MusicEntry : BoxContainer
 {
+    /// <summary>
+    /// The <c>MusicResource</c> that this entry represents.
+    /// </summary>
     public MusicResource MusicResource { get; set; }
+    /// <summary>
+    /// Label for displaying the track name, styled with the "MusicEntryLabel" theme type variation by default and "CurrentSongEntryLabel" when the entry is for the currently playing track.
+    /// </summary>
     private Label _nameLabel;
+    /// <summary>
+    /// Label for displaying the track artist, styled with the "MusicEntryLabel" theme type variation by default and "CurrentSongEntryLabel" when the entry is for the currently playing track.
+    /// </summary>
     private Label _artistLabel;
+    /// <summary>
+    /// Label for displaying the track album name, styled with the "MusicEntryLabel" theme type variation by default and "CurrentSongEntryLabel" when the entry is for the currently playing track.
+    /// </summary>
     private Label _albumLabel;
 
     public override void _Ready()

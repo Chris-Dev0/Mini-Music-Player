@@ -9,6 +9,7 @@ public partial class Global : Node
     public bool MusicListAlphabeticalSort = false;
     public static FileManager FileManagerInstance => Instance.GetNode<FileManager>("/root/Main/FileManager");
     public static UiManager UiManagerInstance => Instance.GetNode<UiManager>("/root/Main/UiManager");
+    public static AudioManager AudioManagerInstance => Instance.GetNode<AudioManager>("/root/Main/AudioManager");
     public string FirstDirectoryPath;
     public override void _Ready()
     {

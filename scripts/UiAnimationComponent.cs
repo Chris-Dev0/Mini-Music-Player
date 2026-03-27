@@ -1,7 +1,9 @@
 using Godot;
 using System;
 using System.Collections.Generic;
-
+/// <summary>
+/// A reusable component for animating UI elements using Tweens, added as a child to any Control node.
+/// </summary>
 public partial class UiAnimationComponent : Node
 {
     private Control ParentControl { get; set; }

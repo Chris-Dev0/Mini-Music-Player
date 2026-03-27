@@ -4,10 +4,11 @@ using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using static Global;
 using static SignalBus;
+/// <summary>
+/// Handles directory selection and loading music files into the application as MusicResource objects.
+/// </summary>
 public partial class FileManager : Node
 {
-    
-    
     [Export]
     private Texture _defaultAlbumArtTexture;
     private FileDialog _fileDialog;
@@ -22,7 +23,10 @@ public partial class FileManager : Node
         _lastDirectoryPath = "";
         _uiManagerInstance = Global.UiManagerInstance;
     }
-
+    /// <summary>
+    /// Loads music from the selected directory and tells the UI manager to update the music list. Called when a new directory is selected in the file dialog.
+    /// </summary>
+    /// <param name="directory"></param>
     private async void NewDirectorySelected(string directory)
     {
         _firstDirectory = false;
@@ -31,7 +35,11 @@ public partial class FileManager : Node
         var result = await Task.Run(() => GetMusicFiles(directory));
         _uiManagerInstance.Call("PopulateMusicList");
     }
-
+    /// <summary>
+    /// Scans the selected directory for music files, creates MusicResource objects for each file with metadata via taglib, and adds them to the global music resource list. Called from NewDirectorySelected.
+    /// </summary>
+    /// <param name="directory"></param>
+    /// <returns></returns>
     private async Task<int> GetMusicFiles(string directory)
     {
         var openDir = DirAccess.Open(directory);
@@ -140,7 +148,9 @@ public partial class FileManager : Node
         return null;
     }
     
-    
+    /// <summary>
+    /// Shows the native OS file dialog for selecting a directory to load music from, starting at the last selected directory or a default path if the last directory is not valid.
+    /// </summary>
     private void ShowFileDialog()
     {
         if((_firstDirectory && DirAccess.DirExistsAbsolute(Instance.FirstDirectoryPath)) || (!DirAccess.DirExistsAbsolute(_lastDirectoryPath)))
