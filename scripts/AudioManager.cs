@@ -150,10 +150,9 @@ public partial class AudioManager : Node
     /// <param name="resource"></param>
     private void SongChanged(MusicResource resource)
     {
+        _player.Stop();
         _player.Stream=_fileManager.LoadMusicResource(resource.Path);
-        _player.Seek(0.0f);
-        _player.Play();
-        _player.Seek(0.0f);
+        _player.Play(0.0f);
         _playPauseButton.Icon = _pauseButtonTexture;
         _playPauseButton.TooltipText = "Pause";
         SigBus.EmitSignal(nameof(SigBus.SongChanged),resource);
