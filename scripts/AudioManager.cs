@@ -152,6 +152,7 @@ public partial class AudioManager : Node
     {
         _player.Stop();
         _player.Stream=_fileManager.LoadMusicResource(resource.Path);
+        _fileManager.LoadAlbumArt(resource);
         _player.Play(0.0f);
         _playPauseButton.Icon = _pauseButtonTexture;
         _playPauseButton.TooltipText = "Pause";

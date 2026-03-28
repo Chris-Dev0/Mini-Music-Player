@@ -17,7 +17,6 @@ public partial class FileManager : Node
     private UiManager _uiManagerInstance;
     public override void _Ready()
     {
-        SigBus.NewDirectorySelected += NewDirectorySelected;
         _fileDialog = GetNode<FileDialog>("FileDialog");
         _fileDialog.DirSelected += NewDirectorySelected;
         _lastDirectoryPath = "";
@@ -55,42 +54,16 @@ public partial class FileManager : Node
                 if (filename.GetExtension() == "mp3" || filename.GetExtension() == "ogg" ||
                     filename.GetExtension() == "wav")
                 {
-                    var fixedDir = ProjectSettings.GlobalizePath(directory+"/"+filename);
-                    Texture2D albumArt = null;
+                    var fixedDir = ProjectSettings.GlobalizePath(directory + "/" + filename);
                     using var tagFile = TagLib.File.Create(fixedDir);
-                    var pictureData = tagFile.Tag.Pictures.Length > 0 ? tagFile.Tag.Pictures[0].Data.Data : null;
-                    if (pictureData != null)
+                    var music = new MusicResource
                     {
-                        var albumImage = new Image();
-                        var mimeType = tagFile.Tag.Pictures[0].MimeType.ToLower();
-                        if (mimeType.Contains("jpeg") || mimeType.Contains("jpg"))
-                        {
-                            albumImage.LoadJpgFromBuffer(pictureData);
-                            albumImage.Resize(200, 200, Image.Interpolation.Lanczos);
-                            albumArt = ImageTexture.CreateFromImage(albumImage);
-                        }
-                        else if (mimeType.Contains("png"))
-                        {
-                            albumImage.LoadPngFromBuffer(pictureData);
-                            albumImage.Resize(200, 200, Image.Interpolation.Lanczos);
-                            albumArt = ImageTexture.CreateFromImage(albumImage);
-                        }
-                        else
-                        {
-                            albumArt = (Texture2D)_defaultAlbumArtTexture;
-                        }
-                    }
-                    else
-                    {
-                        albumArt = (Texture2D)_defaultAlbumArtTexture;
-                    }
-                    var music = new MusicResource();
-                    music.Path = directory + "/" + filename;
-                    music.Name =  tagFile.Tag.Title ?? System.IO.Path.GetFileNameWithoutExtension(filename);
-                    music.Artist = tagFile.Tag.FirstPerformer ?? "unknown";
-                    music.Album = tagFile.Tag.Album ?? "unknown";
-                    music.AlbumArt = albumArt;
-                    music.TrackNumber = (int)tagFile.Tag.Track;
+                        Path = directory + "/" + filename,
+                        Name = tagFile.Tag.Title ?? System.IO.Path.GetFileNameWithoutExtension(filename),
+                        Artist = tagFile.Tag.FirstPerformer ?? "unknown",
+                        Album = tagFile.Tag.Album ?? "unknown",
+                        TrackNumber = (int)tagFile.Tag.Track
+                    };
                     switch (filename.GetExtension())
                     {
                         case "mp3":
@@ -106,14 +79,13 @@ public partial class FileManager : Node
                     Instance.MusicResources.Add(music);
                 }
                 filename = openDir.GetNext();
-                
             }
         }
         else
         {
-            SigBus.EmitSignal(nameof(SigBus.SendNotification),1,"Directory is not valid, "+DirAccess.GetOpenError(), 2);
+            SigBus.EmitSignal(nameof(SigBus.SendNotification), 1, "Directory is not valid, " + DirAccess.GetOpenError(), 2);
         }
-        if(!Instance.MusicListAlphabeticalSort)
+        if (!Instance.MusicListAlphabeticalSort)
             Instance.MusicResources.Sort((resource, musicResource) => resource.TrackNumber.CompareTo(musicResource.TrackNumber));
         else
             Instance.MusicResources.Sort((resource, musicResource) => resource.Name.CompareTo(musicResource.Name));
@@ -147,17 +119,48 @@ public partial class FileManager : Node
         }
         return null;
     }
-    
+    /// <summary>
+    /// Called from the AudioManager to load album art for the currently playing song. If no album art is found, the default album art texture is used.
+    /// </summary>
+    /// <param name="resource"></param>
+    public void LoadAlbumArt(MusicResource resource)
+    {
+        using var tagFile = TagLib.File.Create(resource.Path);
+        var pictureData = tagFile.Tag.Pictures.Length > 0 ? tagFile.Tag.Pictures[0].Data.Data : null;
+        if (pictureData != null)
+        {
+            var albumImage = new Image();
+            var mimeType = tagFile.Tag.Pictures[0].MimeType.ToLower();
+            if (mimeType.Contains("jpeg") || mimeType.Contains("jpg"))
+            {
+                albumImage.LoadJpgFromBuffer(pictureData);
+                //albumImage.Resize(200, 200, Image.Interpolation.Lanczos);
+                resource.AlbumArt = ImageTexture.CreateFromImage(albumImage);
+            }
+            else if (mimeType.Contains("png"))
+            {
+                albumImage.LoadPngFromBuffer(pictureData);
+                //albumImage.Resize(200, 200, Image.Interpolation.Lanczos);
+                resource.AlbumArt = ImageTexture.CreateFromImage(albumImage);
+            }
+            else
+            {
+                resource.AlbumArt = _defaultAlbumArtTexture;
+            }
+        }
+        
+    }
+
     /// <summary>
     /// Shows the native OS file dialog for selecting a directory to load music from, starting at the last selected directory or a default path if the last directory is not valid.
     /// </summary>
     private void ShowFileDialog()
     {
-        if((_firstDirectory && DirAccess.DirExistsAbsolute(Instance.FirstDirectoryPath)) || (!DirAccess.DirExistsAbsolute(_lastDirectoryPath)))
+        if ((_firstDirectory && DirAccess.DirExistsAbsolute(Instance.FirstDirectoryPath)) || (!DirAccess.DirExistsAbsolute(_lastDirectoryPath)))
         {
             _fileDialog.SetCurrentPath(Instance.FirstDirectoryPath);
         }
-        else if(!DirAccess.DirExistsAbsolute(_lastDirectoryPath))
+        else if (!DirAccess.DirExistsAbsolute(_lastDirectoryPath))
         {
             _fileDialog.SetCurrentPath("C:/"); //add linux fallback path
         }
