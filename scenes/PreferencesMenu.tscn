@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://jsrek7nd7ek4"]
+[gd_scene format=3 uid="uid://jsrek7nd7ek4"]
 
 [ext_resource type="Theme" uid="uid://35346j02g11j" path="res://resources/main_theme.tres" id="1_3w5lx"]
 [ext_resource type="Texture2D" uid="uid://dqyhqa2hfcgbx" path="res://assets/icons/CloseIcon.png" id="2_60f6f"]
@@ -7,9 +7,10 @@
 [ext_resource type="Texture2D" uid="uid://ck2t2yg36by4e" path="res://assets/icons/DirectoryIcon.png" id="4_rfvy8"]
 [ext_resource type="PackedScene" uid="uid://cetghkr106g0u" path="res://scenes/UiAnimationComponent.tscn" id="5_7ovxv"]
 
-[node name="PreferencesMenu" type="Window" node_paths=PackedStringArray("_defaultDirectory", "_scaleButton", "_sortingButton", "_audioOutputButton")]
+[node name="PreferencesMenu" type="Window" unique_id=570938547 node_paths=PackedStringArray("_defaultDirectory", "_scaleButton", "_sortingButton", "_audioOutputButton")]
 transparent_bg = true
 canvas_item_default_texture_filter = 0
+oversampling_override = 1.0
 position = Vector2i(0, 36)
 size = Vector2i(400, 300)
 transient = true
@@ -25,7 +26,7 @@ _scaleButton = NodePath("PanelContainer/VBoxContainer/MarginContainer/PanelConta
 _sortingButton = NodePath("PanelContainer/VBoxContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/MusicSortingHBoxContainer/OptionButton")
 _audioOutputButton = NodePath("PanelContainer/VBoxContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/AudioOutputHBoxContainer/OptionButton")
 
-[node name="PanelContainer" type="PanelContainer" parent="."]
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1263045798]
 texture_filter = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -36,26 +37,26 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_type_variation = &"BackgroundPanel"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer" unique_id=172676291]
 layout_mode = 2
 
-[node name="HeaderPanelContainer" type="PanelContainer" parent="PanelContainer/VBoxContainer"]
+[node name="HeaderPanelContainer" type="PanelContainer" parent="PanelContainer/VBoxContainer" unique_id=1148074835]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.1
 theme_type_variation = &"HeaderPanel"
 
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/VBoxContainer/HeaderPanelContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/VBoxContainer/HeaderPanelContainer" unique_id=2064815781]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/HeaderPanelContainer/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/HeaderPanelContainer/MarginContainer" unique_id=1521542000]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/HeaderPanelContainer/MarginContainer/HBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/HeaderPanelContainer/MarginContainer/HBoxContainer" unique_id=536096069]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="TextureRect" type="TextureRect" parent="PanelContainer/VBoxContainer/HeaderPanelContainer/MarginContainer/HBoxContainer/HBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/VBoxContainer/HeaderPanelContainer/MarginContainer/HBoxContainer/HBoxContainer" unique_id=1027226823]
 self_modulate = Color(0.709804, 0.619608, 0.564706, 1)
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
@@ -65,7 +66,7 @@ texture = ExtResource("3_ytk8i")
 expand_mode = 3
 stretch_mode = 5
 
-[node name="UiAnimationComponent2" parent="PanelContainer/VBoxContainer/HeaderPanelContainer/MarginContainer/HBoxContainer/HBoxContainer/TextureRect" instance=ExtResource("5_7ovxv")]
+[node name="UiAnimationComponent2" parent="PanelContainer/VBoxContainer/HeaderPanelContainer/MarginContainer/HBoxContainer/HBoxContainer/TextureRect" unique_id=452910858 instance=ExtResource("5_7ovxv")]
 Trigger = 7
 PropertyTween = 1
 TweenEaseType = 1
@@ -75,16 +76,16 @@ _reverseTweenDuration = 0.05
 _scaleProp = Vector2(1.1, 1.1)
 _minimumSizeProp = Vector2(33, 33)
 
-[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/HeaderPanelContainer/MarginContainer/HBoxContainer/HBoxContainer"]
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/HeaderPanelContainer/MarginContainer/HBoxContainer/HBoxContainer" unique_id=1549355566]
 layout_mode = 2
 text = "Preferences"
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="PanelContainer/VBoxContainer/HeaderPanelContainer/MarginContainer/HBoxContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="PanelContainer/VBoxContainer/HeaderPanelContainer/MarginContainer/HBoxContainer" unique_id=826700752]
 layout_mode = 2
 size_flags_horizontal = 3
 alignment = 2
 
-[node name="ExitButton" type="Button" parent="PanelContainer/VBoxContainer/HeaderPanelContainer/MarginContainer/HBoxContainer/HBoxContainer2"]
+[node name="ExitButton" type="Button" parent="PanelContainer/VBoxContainer/HeaderPanelContainer/MarginContainer/HBoxContainer/HBoxContainer2" unique_id=1235009095]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 focus_mode = 0
@@ -93,7 +94,7 @@ flat = true
 icon_alignment = 1
 expand_icon = true
 
-[node name="UiAnimationComponent" parent="PanelContainer/VBoxContainer/HeaderPanelContainer/MarginContainer/HBoxContainer/HBoxContainer2/ExitButton" instance=ExtResource("5_7ovxv")]
+[node name="UiAnimationComponent" parent="PanelContainer/VBoxContainer/HeaderPanelContainer/MarginContainer/HBoxContainer/HBoxContainer2/ExitButton" unique_id=996630498 instance=ExtResource("5_7ovxv")]
 Trigger = 5
 PropertyTween = 1
 TweenEaseType = 1
@@ -102,7 +103,7 @@ _reverseAnim = true
 _reverseTweenDuration = 0.05
 _scaleProp = Vector2(1.2, 1.2)
 
-[node name="UiAnimationComponent2" parent="PanelContainer/VBoxContainer/HeaderPanelContainer/MarginContainer/HBoxContainer/HBoxContainer2/ExitButton" instance=ExtResource("5_7ovxv")]
+[node name="UiAnimationComponent2" parent="PanelContainer/VBoxContainer/HeaderPanelContainer/MarginContainer/HBoxContainer/HBoxContainer2/ExitButton" unique_id=2011747288 instance=ExtResource("5_7ovxv")]
 Trigger = 7
 PropertyTween = 1
 TweenEaseType = 1
@@ -112,47 +113,47 @@ _reverseTweenDuration = 0.05
 _scaleProp = Vector2(1.1, 1.1)
 _minimumSizeProp = Vector2(33, 33)
 
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/VBoxContainer" unique_id=1678667885]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="PanelContainer" type="PanelContainer" parent="PanelContainer/VBoxContainer/MarginContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="PanelContainer/VBoxContainer/MarginContainer" unique_id=1412596515]
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/VBoxContainer/MarginContainer/PanelContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/VBoxContainer/MarginContainer/PanelContainer" unique_id=1775085593]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer/MarginContainer/PanelContainer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer/MarginContainer/PanelContainer/MarginContainer" unique_id=745677981]
 layout_mode = 2
 
-[node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer/VBoxContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer/VBoxContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1458984693]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer" unique_id=85696804]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="AppearancePanelContainer" type="PanelContainer" parent="PanelContainer/VBoxContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="AppearancePanelContainer" type="PanelContainer" parent="PanelContainer/VBoxContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer" unique_id=466058229]
 layout_mode = 2
 theme_type_variation = &"BackgroundPanel"
 
-[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/AppearancePanelContainer"]
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/AppearancePanelContainer" unique_id=1353146676]
 layout_mode = 2
 text = "Appearance"
 vertical_alignment = 1
 
-[node name="ScaleHBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="ScaleHBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer" unique_id=1608287982]
 layout_mode = 2
 tooltip_text = "Application scale"
 
-[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/ScaleHBoxContainer"]
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/ScaleHBoxContainer" unique_id=1251096531]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Scale:"
 
-[node name="OptionButton" type="OptionButton" parent="PanelContainer/VBoxContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/ScaleHBoxContainer"]
+[node name="OptionButton" type="OptionButton" parent="PanelContainer/VBoxContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/ScaleHBoxContainer" unique_id=2144076237]
 layout_mode = 2
 size_flags_horizontal = 3
 focus_mode = 0
@@ -164,7 +165,7 @@ popup/item_1/id = 1
 popup/item_2/text = "x2"
 popup/item_2/id = 2
 
-[node name="UiAnimationComponent" parent="PanelContainer/VBoxContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/ScaleHBoxContainer/OptionButton" instance=ExtResource("5_7ovxv")]
+[node name="UiAnimationComponent" parent="PanelContainer/VBoxContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/ScaleHBoxContainer/OptionButton" unique_id=1598993819 instance=ExtResource("5_7ovxv")]
 Trigger = 5
 PropertyTween = 1
 TweenEaseType = 1
@@ -173,16 +174,17 @@ _reverseAnim = true
 _reverseTweenDuration = 0.05
 _scaleProp = Vector2(1.1, 1.1)
 
-[node name="ThemeHBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="ThemeHBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer" unique_id=866457433]
+visible = false
 layout_mode = 2
 tooltip_text = "Application scale"
 
-[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/ThemeHBoxContainer"]
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/ThemeHBoxContainer" unique_id=1094591531]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Theme:"
 
-[node name="OptionButton" type="OptionButton" parent="PanelContainer/VBoxContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/ThemeHBoxContainer"]
+[node name="OptionButton" type="OptionButton" parent="PanelContainer/VBoxContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/ThemeHBoxContainer" unique_id=168661606]
 layout_mode = 2
 size_flags_horizontal = 3
 focus_mode = 0
@@ -191,7 +193,7 @@ item_count = 1
 popup/item_0/text = "Default"
 popup/item_0/id = 0
 
-[node name="UiAnimationComponent" parent="PanelContainer/VBoxContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/ThemeHBoxContainer/OptionButton" instance=ExtResource("5_7ovxv")]
+[node name="UiAnimationComponent" parent="PanelContainer/VBoxContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/ThemeHBoxContainer/OptionButton" unique_id=1249897545 instance=ExtResource("5_7ovxv")]
 Trigger = 5
 PropertyTween = 1
 TweenEaseType = 1
@@ -200,33 +202,33 @@ _reverseAnim = true
 _reverseTweenDuration = 0.05
 _scaleProp = Vector2(1.1, 1.1)
 
-[node name="FilesPanelContainer" type="PanelContainer" parent="PanelContainer/VBoxContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="FilesPanelContainer" type="PanelContainer" parent="PanelContainer/VBoxContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer" unique_id=24627620]
 layout_mode = 2
 theme_type_variation = &"BackgroundPanel"
 
-[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/FilesPanelContainer"]
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/FilesPanelContainer" unique_id=251435107]
 layout_mode = 2
 text = "Files"
 vertical_alignment = 1
 
-[node name="DefaultDirHBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="DefaultDirHBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer" unique_id=1587379884]
 layout_mode = 2
 tooltip_text = "Default directory shown on application launch"
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="PanelContainer/VBoxContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/DefaultDirHBoxContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="PanelContainer/VBoxContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/DefaultDirHBoxContainer" unique_id=2073085467]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/DefaultDirHBoxContainer/HBoxContainer2"]
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/DefaultDirHBoxContainer/HBoxContainer2" unique_id=105422694]
 layout_mode = 2
 text = "Default Directory:"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/DefaultDirHBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/DefaultDirHBoxContainer" unique_id=1213104462]
 layout_mode = 2
 size_flags_horizontal = 3
 alignment = 2
 
-[node name="DefaultDirectoryButton" type="Button" parent="PanelContainer/VBoxContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/DefaultDirHBoxContainer/HBoxContainer"]
+[node name="DefaultDirectoryButton" type="Button" parent="PanelContainer/VBoxContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/DefaultDirHBoxContainer/HBoxContainer" unique_id=1076374704]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 focus_mode = 0
@@ -235,7 +237,7 @@ flat = true
 icon_alignment = 1
 expand_icon = true
 
-[node name="UiAnimationComponent" parent="PanelContainer/VBoxContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/DefaultDirHBoxContainer/HBoxContainer/DefaultDirectoryButton" instance=ExtResource("5_7ovxv")]
+[node name="UiAnimationComponent" parent="PanelContainer/VBoxContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/DefaultDirHBoxContainer/HBoxContainer/DefaultDirectoryButton" unique_id=593702 instance=ExtResource("5_7ovxv")]
 Trigger = 5
 PropertyTween = 1
 TweenEaseType = 1
@@ -244,7 +246,7 @@ _reverseAnim = true
 _reverseTweenDuration = 0.05
 _scaleProp = Vector2(1.2, 1.2)
 
-[node name="UiAnimationComponent2" parent="PanelContainer/VBoxContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/DefaultDirHBoxContainer/HBoxContainer/DefaultDirectoryButton" instance=ExtResource("5_7ovxv")]
+[node name="UiAnimationComponent2" parent="PanelContainer/VBoxContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/DefaultDirHBoxContainer/HBoxContainer/DefaultDirectoryButton" unique_id=1255285345 instance=ExtResource("5_7ovxv")]
 Trigger = 7
 PropertyTween = 1
 TweenEaseType = 1
@@ -254,25 +256,25 @@ _reverseTweenDuration = 0.05
 _scaleProp = Vector2(1.1, 1.1)
 _minimumSizeProp = Vector2(33, 33)
 
-[node name="LineEdit" type="LineEdit" parent="PanelContainer/VBoxContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/DefaultDirHBoxContainer/HBoxContainer"]
+[node name="LineEdit" type="LineEdit" parent="PanelContainer/VBoxContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/DefaultDirHBoxContainer/HBoxContainer" unique_id=434792186]
 layout_mode = 2
 size_flags_horizontal = 3
 focus_mode = 0
 editable = false
 
-[node name="MusicSortingHBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="MusicSortingHBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer" unique_id=657242296]
 layout_mode = 2
 tooltip_text = "Takes effect upon next loaded directory"
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="PanelContainer/VBoxContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/MusicSortingHBoxContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="PanelContainer/VBoxContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/MusicSortingHBoxContainer" unique_id=2081853683]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/MusicSortingHBoxContainer/HBoxContainer2"]
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/MusicSortingHBoxContainer/HBoxContainer2" unique_id=2081249783]
 layout_mode = 2
 text = "Music Sorting:"
 
-[node name="OptionButton" type="OptionButton" parent="PanelContainer/VBoxContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/MusicSortingHBoxContainer"]
+[node name="OptionButton" type="OptionButton" parent="PanelContainer/VBoxContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/MusicSortingHBoxContainer" unique_id=428364985]
 layout_mode = 2
 size_flags_horizontal = 3
 focus_mode = 0
@@ -283,7 +285,7 @@ popup/item_0/id = 0
 popup/item_1/text = "Track Number"
 popup/item_1/id = 1
 
-[node name="UiAnimationComponent" parent="PanelContainer/VBoxContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/MusicSortingHBoxContainer/OptionButton" instance=ExtResource("5_7ovxv")]
+[node name="UiAnimationComponent" parent="PanelContainer/VBoxContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/MusicSortingHBoxContainer/OptionButton" unique_id=1747314457 instance=ExtResource("5_7ovxv")]
 Trigger = 5
 PropertyTween = 1
 TweenEaseType = 1
@@ -292,31 +294,82 @@ _reverseAnim = true
 _reverseTweenDuration = 0.05
 _scaleProp = Vector2(1.2, 1.2)
 
-[node name="AudioPanelContainer" type="PanelContainer" parent="PanelContainer/VBoxContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="FFmpegHBoxContainer2" type="HBoxContainer" parent="PanelContainer/VBoxContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer" unique_id=1237781657]
+layout_mode = 2
+tooltip_text = "Default directory shown on application launch"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="PanelContainer/VBoxContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/FFmpegHBoxContainer2" unique_id=1912513241]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/FFmpegHBoxContainer2/HBoxContainer2" unique_id=186820030]
+layout_mode = 2
+text = "FFmpeg Path:"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/FFmpegHBoxContainer2" unique_id=1668300357]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 2
+
+[node name="FFmpegDirectoryButton" type="Button" parent="PanelContainer/VBoxContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/FFmpegHBoxContainer2/HBoxContainer" unique_id=441157482]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+focus_mode = 0
+icon = ExtResource("4_rfvy8")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="UiAnimationComponent" parent="PanelContainer/VBoxContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/FFmpegHBoxContainer2/HBoxContainer/FFmpegDirectoryButton" unique_id=1518896770 instance=ExtResource("5_7ovxv")]
+Trigger = 5
+PropertyTween = 1
+TweenEaseType = 1
+_tweenDuration = 0.05
+_reverseAnim = true
+_reverseTweenDuration = 0.05
+_scaleProp = Vector2(1.2, 1.2)
+
+[node name="UiAnimationComponent2" parent="PanelContainer/VBoxContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/FFmpegHBoxContainer2/HBoxContainer/FFmpegDirectoryButton" unique_id=1329181475 instance=ExtResource("5_7ovxv")]
+Trigger = 7
+PropertyTween = 1
+TweenEaseType = 1
+_tweenDuration = 0.05
+_reverseAnim = true
+_reverseTweenDuration = 0.05
+_scaleProp = Vector2(1.1, 1.1)
+_minimumSizeProp = Vector2(33, 33)
+
+[node name="LineEdit" type="LineEdit" parent="PanelContainer/VBoxContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/FFmpegHBoxContainer2/HBoxContainer" unique_id=130895841]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 0
+editable = false
+
+[node name="AudioPanelContainer" type="PanelContainer" parent="PanelContainer/VBoxContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer" unique_id=751855756]
 layout_mode = 2
 theme_type_variation = &"BackgroundPanel"
 
-[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/AudioPanelContainer"]
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/AudioPanelContainer" unique_id=1463715166]
 layout_mode = 2
 text = "Audio"
 vertical_alignment = 1
 
-[node name="AudioOutputHBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="AudioOutputHBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer" unique_id=1670013561]
 layout_mode = 2
 tooltip_text = "Audio Output Device"
 
-[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/AudioOutputHBoxContainer"]
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/AudioOutputHBoxContainer" unique_id=117343497]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Output Device:"
 
-[node name="OptionButton" type="OptionButton" parent="PanelContainer/VBoxContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/AudioOutputHBoxContainer"]
+[node name="OptionButton" type="OptionButton" parent="PanelContainer/VBoxContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/AudioOutputHBoxContainer" unique_id=77236540]
 layout_mode = 2
 size_flags_horizontal = 3
 focus_mode = 0
 fit_to_longest_item = false
 
-[node name="UiAnimationComponent" parent="PanelContainer/VBoxContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/AudioOutputHBoxContainer/OptionButton" instance=ExtResource("5_7ovxv")]
+[node name="UiAnimationComponent" parent="PanelContainer/VBoxContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/AudioOutputHBoxContainer/OptionButton" unique_id=1448554087 instance=ExtResource("5_7ovxv")]
 Trigger = 5
 PropertyTween = 1
 TweenEaseType = 1
@@ -325,18 +378,18 @@ _reverseAnim = true
 _reverseTweenDuration = 0.05
 _scaleProp = Vector2(1.1, 1.1)
 
-[node name="SaveCloseHBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="SaveCloseHBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=368895038]
 layout_mode = 2
 alignment = 1
 
-[node name="Button2" type="Button" parent="PanelContainer/VBoxContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/SaveCloseHBoxContainer"]
+[node name="Button2" type="Button" parent="PanelContainer/VBoxContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/SaveCloseHBoxContainer" unique_id=673844762]
 layout_mode = 2
 size_flags_vertical = 8
 tooltip_text = "Save and close"
 focus_mode = 0
 text = "save"
 
-[node name="UiAnimationComponent" parent="PanelContainer/VBoxContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/SaveCloseHBoxContainer/Button2" instance=ExtResource("5_7ovxv")]
+[node name="UiAnimationComponent" parent="PanelContainer/VBoxContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/SaveCloseHBoxContainer/Button2" unique_id=312274747 instance=ExtResource("5_7ovxv")]
 Trigger = 5
 PropertyTween = 1
 TweenEaseType = 1
@@ -345,7 +398,7 @@ _reverseAnim = true
 _reverseTweenDuration = 0.05
 _scaleProp = Vector2(1.2, 1.2)
 
-[node name="UiAnimationComponent2" parent="PanelContainer/VBoxContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/SaveCloseHBoxContainer/Button2" instance=ExtResource("5_7ovxv")]
+[node name="UiAnimationComponent2" parent="PanelContainer/VBoxContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/SaveCloseHBoxContainer/Button2" unique_id=1663344715 instance=ExtResource("5_7ovxv")]
 Trigger = 7
 PropertyTween = 1
 TweenEaseType = 1
@@ -354,14 +407,14 @@ _reverseAnim = true
 _reverseTweenDuration = 0.05
 _scaleProp = Vector2(1.1, 1.1)
 
-[node name="Button" type="Button" parent="PanelContainer/VBoxContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/SaveCloseHBoxContainer"]
+[node name="Button" type="Button" parent="PanelContainer/VBoxContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/SaveCloseHBoxContainer" unique_id=363061985]
 layout_mode = 2
 size_flags_vertical = 8
 tooltip_text = "Close without saving"
 focus_mode = 0
 text = "close"
 
-[node name="UiAnimationComponent" parent="PanelContainer/VBoxContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/SaveCloseHBoxContainer/Button" instance=ExtResource("5_7ovxv")]
+[node name="UiAnimationComponent" parent="PanelContainer/VBoxContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/SaveCloseHBoxContainer/Button" unique_id=40351419 instance=ExtResource("5_7ovxv")]
 Trigger = 5
 PropertyTween = 1
 TweenEaseType = 1
@@ -370,7 +423,7 @@ _reverseAnim = true
 _reverseTweenDuration = 0.05
 _scaleProp = Vector2(1.2, 1.2)
 
-[node name="UiAnimationComponent2" parent="PanelContainer/VBoxContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/SaveCloseHBoxContainer/Button" instance=ExtResource("5_7ovxv")]
+[node name="UiAnimationComponent2" parent="PanelContainer/VBoxContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/SaveCloseHBoxContainer/Button" unique_id=731763648 instance=ExtResource("5_7ovxv")]
 Trigger = 7
 PropertyTween = 1
 TweenEaseType = 1
@@ -379,17 +432,23 @@ _reverseAnim = true
 _reverseTweenDuration = 0.05
 _scaleProp = Vector2(1.1, 1.1)
 
-[node name="UiAnimationComponent" parent="PanelContainer" instance=ExtResource("5_7ovxv")]
+[node name="UiAnimationComponent" parent="PanelContainer" unique_id=1237887643 instance=ExtResource("5_7ovxv")]
 Trigger = 2
 PropertyTween = 1
 TweenEaseType = 2
 _tweenDuration = 0.1
 _scaleProp = Vector2(1, 1)
 
-[node name="FileDialog" type="FileDialog" parent="."]
+[node name="FileDialog" type="FileDialog" parent="." unique_id=993383824]
 title = "Open a Directory"
 ok_button_text = "Select Current Folder"
 file_mode = 2
+access = 2
+use_native_dialog = true
+
+[node name="FileDialog2" type="FileDialog" parent="." unique_id=1559430301]
+title = "Open a File"
+file_mode = 0
 access = 2
 use_native_dialog = true
 
@@ -397,8 +456,11 @@ use_native_dialog = true
 [connection signal="item_selected" from="PanelContainer/VBoxContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/ScaleHBoxContainer/OptionButton" to="." method="SetResolution"]
 [connection signal="pressed" from="PanelContainer/VBoxContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/DefaultDirHBoxContainer/HBoxContainer/DefaultDirectoryButton" to="FileDialog" method="set_visible" binds= [true]]
 [connection signal="item_selected" from="PanelContainer/VBoxContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/MusicSortingHBoxContainer/OptionButton" to="." method="SortingButtonPressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/FFmpegHBoxContainer2/HBoxContainer/FFmpegDirectoryButton" to="FileDialog2" method="set_visible" binds= [true]]
 [connection signal="item_selected" from="PanelContainer/VBoxContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/AudioOutputHBoxContainer/OptionButton" to="." method="AudioOutputSelected"]
 [connection signal="pressed" from="PanelContainer/VBoxContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/SaveCloseHBoxContainer/Button2" to="." method="SavePreferences"]
 [connection signal="pressed" from="PanelContainer/VBoxContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/SaveCloseHBoxContainer/Button" to="." method="ExitButtonPressed"]
 [connection signal="dir_selected" from="FileDialog" to="." method="DirectoryLineEditChanged"]
 [connection signal="dir_selected" from="FileDialog" to="PanelContainer/VBoxContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/DefaultDirHBoxContainer/HBoxContainer/LineEdit" method="set_text"]
+[connection signal="file_selected" from="FileDialog2" to="." method="FfmpegDirectoryLineEditChanged"]
+[connection signal="file_selected" from="FileDialog2" to="PanelContainer/VBoxContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/FFmpegHBoxContainer2/HBoxContainer/LineEdit" method="_set_text"]

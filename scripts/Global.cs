@@ -11,6 +11,7 @@ public partial class Global : Node
     public static UiManager UiManagerInstance => Instance.GetNode<UiManager>("/root/Main/UiManager");
     public static AudioManager AudioManagerInstance => Instance.GetNode<AudioManager>("/root/Main/AudioManager");
     public string FirstDirectoryPath;
+    public string FfmpegPath;
     public override void _Ready()
     {
         base._Ready();

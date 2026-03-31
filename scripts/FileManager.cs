@@ -133,7 +133,7 @@ public partial class FileManager : Node
     {
         var convertProcess = new ProcessStartInfo
         {
-            FileName = "/usr/bin/ffmpeg",
+            FileName = Instance.FfmpegPath,
             Arguments = $"-i \"{inputPath}\" -f ogg -acodec libvorbis pipe:1",
             RedirectStandardOutput = true,
             RedirectStandardError = true,

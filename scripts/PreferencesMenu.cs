@@ -5,6 +5,8 @@ using static Global;
 public partial class PreferencesMenu : Window
 {
     [Export]
+    private LineEdit _ffmpegPath;
+    [Export]
     private LineEdit _defaultDirectory;
     [Export]
     private OptionButton _scaleButton;
@@ -56,6 +58,7 @@ public partial class PreferencesMenu : Window
         _defaultDirectory.TooltipText = _defaultDirectory.Text;
         var musicSort = (bool)_configFile.GetValue("Preferences", "DefaultSort", false);
         Instance.MusicListAlphabeticalSort = musicSort;
+        Instance.FfmpegPath = (string)_configFile.GetValue("Preferences", "FfmpegPath", "/usr/bin/ffmpeg");
         _sortingButton.Selected = musicSort ? 0 : 1;
         SetupAudioDevice();
     }
@@ -123,6 +126,11 @@ public partial class PreferencesMenu : Window
     {
         Instance.FirstDirectoryPath = ProjectSettings.GlobalizePath(newText) + "/";
         _configFile.SetValue("Preferences", "DefaultDirectory", Instance.FirstDirectoryPath);
+    }
+    private void FfmpegDirectoryLineEditChanged(string newText)
+    {
+        Instance.FfmpegPath = ProjectSettings.GlobalizePath(newText);
+        _configFile.SetValue("Preferences", "FfmpegPath", Instance.FfmpegPath);
     }
 
     private void SetupAudioDevice()
