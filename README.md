@@ -2,7 +2,7 @@
 - Mini-Music-Player is a small music player desktop application I developed for my personal use and as a means of learning the UI system of the [Godot](https://godotengine.org/) game engine. Scripted with C#.
 ![](assets/previewImage.png)
 # Features
-- 📻Supports mp3, wav, and ogg files
+- 📻Supports mp3, wav, ogg, and flac (requires ffmpeg) files
 - 📂Directory based playlists
 - 🎨Minimal UI with scaling options to fit different displays
 # Hotkeys

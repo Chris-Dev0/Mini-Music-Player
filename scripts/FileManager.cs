@@ -1,9 +1,12 @@
 using Godot;
 using System;
 using System.Runtime.CompilerServices;
+using System.Threading;
 using System.Threading.Tasks;
 using static Global;
 using static SignalBus;
+using System.Diagnostics;
+using System.IO;
 /// <summary>
 /// Handles directory selection and loading music files into the application as MusicResource objects.
 /// </summary>
@@ -52,7 +55,7 @@ public partial class FileManager : Node
             while (filename != "" && filename != "." && filename != "..")
             {
                 if (filename.GetExtension() == "mp3" || filename.GetExtension() == "ogg" ||
-                    filename.GetExtension() == "wav")
+                    filename.GetExtension() == "wav" || filename.GetExtension() == "flac")
                 {
                     var fixedDir = ProjectSettings.GlobalizePath(directory + "/" + filename);
                     using var tagFile = TagLib.File.Create(fixedDir);
@@ -74,6 +77,9 @@ public partial class FileManager : Node
                             break;
                         case "wav":
                             music.Extension = "wav";
+                            break;
+                        case "flac":
+                            music.Extension = "flac";
                             break;
                     }
                     Instance.MusicResources.Add(music);
@@ -97,7 +103,7 @@ public partial class FileManager : Node
     /// <param name="filepath"></param>
     public AudioStream LoadMusicResource(string path)
     {
-        using var file = FileAccess.Open(path, FileAccess.ModeFlags.Read);
+        using var file = Godot.FileAccess.Open(path, Godot.FileAccess.ModeFlags.Read);
         if (file == null)
         {
             GD.PushError($"Could not open file {path}");
@@ -116,8 +122,30 @@ public partial class FileManager : Node
             case "ogg":
                 var oggSound = AudioStreamOggVorbis.LoadFromFile(path);
                 return oggSound;
+            case "flac":
+                var oggData = ConvertToOggInMemory(path);
+                return AudioStreamOggVorbis.LoadFromBuffer(oggData);
+
         }
         return null;
+    }
+    public static byte[] ConvertToOggInMemory(string inputPath)
+    {
+        var convertProcess = new ProcessStartInfo
+        {
+            FileName = "/usr/bin/ffmpeg",
+            Arguments = $"-i \"{inputPath}\" -f ogg -acodec libvorbis pipe:1",
+            RedirectStandardOutput = true,
+            RedirectStandardError = true,
+            UseShellExecute = false,
+            CreateNoWindow = true
+        };
+
+        using var process = Process.Start(convertProcess);
+        using var ms = new MemoryStream();
+        process.StandardOutput.BaseStream.CopyTo(ms);
+        process.WaitForExit();
+        return ms.ToArray();
     }
     /// <summary>
     /// Called from the AudioManager to load album art for the currently playing song. If no album art is found, the default album art texture is used.
@@ -148,7 +176,7 @@ public partial class FileManager : Node
                 resource.AlbumArt = _defaultAlbumArtTexture;
             }
         }
-        
+
     }
 
     /// <summary>
