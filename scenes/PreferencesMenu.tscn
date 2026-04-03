@@ -367,6 +367,7 @@ text = "Output Device:"
 layout_mode = 2
 size_flags_horizontal = 3
 focus_mode = 0
+text_overrun_behavior = 1
 fit_to_longest_item = false
 
 [node name="UiAnimationComponent" parent="PanelContainer/VBoxContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/AudioOutputHBoxContainer/OptionButton" unique_id=1448554087 instance=ExtResource("5_7ovxv")]

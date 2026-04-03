@@ -136,7 +136,8 @@ public partial class PreferencesMenu : Window
     private void SetupAudioDevice()
     {
         string[] deviceList = AudioServer.GetOutputDeviceList();
-        for(var i = 0; i<deviceList.Length-1; i++)
+        _audioOutputButton.Clear();
+        for(var i = 0; i<deviceList.Length; i++)
         {
             _audioOutputButton.AddItem(deviceList[i]);
             if (deviceList[i] == (string)_configFile.GetValue("Audio", "OutputDevice", "Default"))
