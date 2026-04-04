@@ -59,6 +59,8 @@ public partial class PreferencesMenu : Window
         var musicSort = (bool)_configFile.GetValue("Preferences", "DefaultSort", false);
         Instance.MusicListAlphabeticalSort = musicSort;
         Instance.FfmpegPath = (string)_configFile.GetValue("Preferences", "FfmpegPath", "/usr/bin/ffmpeg");
+        _ffmpegPath.Text = Instance.FfmpegPath;
+        _ffmpegPath.TooltipText = _ffmpegPath.Text;
         _sortingButton.Selected = musicSort ? 0 : 1;
         SetupAudioDevice();
     }
@@ -126,11 +128,15 @@ public partial class PreferencesMenu : Window
     {
         Instance.FirstDirectoryPath = ProjectSettings.GlobalizePath(newText) + "/";
         _configFile.SetValue("Preferences", "DefaultDirectory", Instance.FirstDirectoryPath);
+        _defaultDirectory.Text = Instance.FirstDirectoryPath;
+        _defaultDirectory.TooltipText = _defaultDirectory.Text;
     }
     private void FfmpegDirectoryLineEditChanged(string newText)
     {
         Instance.FfmpegPath = ProjectSettings.GlobalizePath(newText);
         _configFile.SetValue("Preferences", "FfmpegPath", Instance.FfmpegPath);
+        _ffmpegPath.Text = Instance.FfmpegPath;
+        _ffmpegPath.TooltipText = _ffmpegPath.Text;
     }
 
     private void SetupAudioDevice()
